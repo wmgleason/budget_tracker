@@ -18,8 +18,9 @@ request.onupgradeneeded = function (e) {
     db.createObjectStore("BudgetStore", { autoIncrement: true });
   }
 };
+
 request.onerror = function (e) {
-  console.log(`Woops! ${e.target.errorCode}`);
+  console.log(`Whoops! ${e.target.errorCode}`);
 };
 
 function checkDatabase() {
@@ -74,3 +75,18 @@ request.onsuccess = function (e) {
     checkDatabase();
   }
 };
+
+const saveRecord = (record) => {
+  console.log("Save record invoked");
+  // Create a transaction on the BudgetStore db with readwrite access
+  const transaction = db.transaction(["BudgetStore"], "readwrite");
+
+  // Access your BudgetStore object store
+  const store = transaction.objectStore("BudgetStore");
+
+  // Add record to your store with add method.
+  store.add(record);
+};
+
+// Listen for app coming back online
+window.addEventListener("online", checkDatabase);
