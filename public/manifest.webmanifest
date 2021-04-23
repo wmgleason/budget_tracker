@@ -3,7 +3,7 @@
     "name": "budget_tracker",
     "icons": [
         {
-            "src": "./assets/img/wallet.jpg",
+            "src": "/icons/wallet.jpg",
             "sizes": "192x192",
             "type": "image/png"
         }
