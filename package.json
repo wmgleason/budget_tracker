@@ -17,6 +17,14 @@
   "bugs": {
     "url": "https://github.com/wmgleason/budget_tracker"
   },
+  "development": {
+  "database": "budget_tracker",
+  "host": "localhost"
+  },
+  "production": {
+    "use_env_variable": "MONGODB_URI",
+    "host": "localhost"
+    },
   "homepage": "https://github.com/wmgleason/budget_tracker",
   "dependencies": {
     "compression": "^1.7.4",
