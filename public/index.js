@@ -24,11 +24,19 @@ fetch("/api/transaction")
     populateChart();
   });
 
+// function populateTotal() {
+//   // reduce transaction amounts to a single total value
+//   let total = transactions.reduce((total, t) => {
+//     return total + parseInt(t.value);
+//   }, 0);
+
 function populateTotal() {
   // reduce transaction amounts to a single total value
-  let total = transactions.reduce((total, t) => {
-    return total + parseInt(t.value);
-  }, 0);
+  const total = transactions
+    .reduce((total, t) => {
+      return total + parseFloat(t.value);
+    }, 0)
+    .toFixed(2);
 
   let totalEl = document.querySelector("#total");
   totalEl.textContent = total;
