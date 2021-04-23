@@ -8,7 +8,7 @@ const FILES_TO_CACHE = [
   `/index.js`,
   `/index.css`,
   `/manifest.webmanifest`,
-  `/assets/img/icons/money.png`,
+  `/icons/money.png`,
 ];
 
 const STATIC_CACHE = `static-cache-v1`;
