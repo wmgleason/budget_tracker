@@ -9,6 +9,7 @@ const FILES_TO_CACHE = [
   `/index.css`,
   `/manifest.webmanifest`,
   `/icons/money.png`,
+  "/styles.css",
 ];
 
 const STATIC_CACHE = `static-cache-v1`;
