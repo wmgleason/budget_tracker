@@ -144,6 +144,31 @@ function sendTransaction(isAdding) {
     });
 }
 
+// Delete
+function clearTransactions() {
+  const deleteTransactions = document.getElementById("tbody");
+  deleteTransactions.innerHTML = "";
+  location.reload();
+}
+
+function clearButton() {
+  fetch("/api/transaction", {
+    method: "DELETE",
+  })
+    .then(function (response) {
+      if (response.status !== 200) {
+        console.log(
+          "Looks like there was a problem. Status Code: " + response.status
+        );
+        return;
+      }
+      clearTransactions();
+    })
+    .catch(function (err) {
+      console.log("Fetch Error :-S", err);
+    });
+}
+
 document.querySelector(`#add-btn`).addEventListener(`click`, (event) => {
   event.preventDefault();
   sendTransaction(true);
