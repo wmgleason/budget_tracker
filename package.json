@@ -23,6 +23,7 @@
   "homepage": "https://github.com/wmgleason/budget_tracker",
   "dependencies": {
     "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lite-server": "^2.5.3",
     "mongodb": "^3.6.6",
