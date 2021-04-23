@@ -1,46 +1,43 @@
 let db;
-// create a new db request for a "budget" database.
-const request = window.indexedDB.open("budget", 1);
+let budgetVersion;
 
-request.onupgradeneeded = function (event) {
-  const db = event.target.result;
-  // create object store called "pending" and set autoIncrement to true
-  db.createObjectStore("pending", { keyPath: "id", autoIncrement: true });
-};
+// Create a new db request for a "budget" database.
+const request = indexedDB.open("budgetTrackerDB", budgetVersion || 21);
 
-request.onsuccess = function (event) {
-  db = event.target.result;
+request.onupgradeneeded = function (e) {
+  console.log("Upgrade needed in IndexDB");
 
-  if (navigator.onLine) {
-    checkDatabase();
+  const { oldVersion } = e;
+  const newVersion = e.newVersion || db.version;
+
+  console.log(`DB Updated from version ${oldVersion} to ${newVersion}`);
+
+  db = e.target.result;
+
+  if (db.objectStoreNames.length === 0) {
+    db.createObjectStore("BudgetStore", { autoIncrement: true });
   }
 };
 
-request.onerror = function (event) {
-  console.log(event);
+request.onerror = function (e) {
+  console.log(`Woops! ${e.target.errorCode}`);
 };
 
-function saveRecord(record) {
-  // create a transaction on the pending db with readwrite access
-  const transaction = db.transaction(["pending"], "readwrite");
-
-  // access your pending object store
-  const objectStore = transaction.objectStore("pending");
-
-  // add record to your store with add method.
-  objectStore.add(record);
-}
-
 function checkDatabase() {
-  const transaction = db.transaction(["pending"]);
-  const objectStore = transaction.objectStore("pending");
+  console.log("check db invoked");
 
-  // open a transaction on your pending db
-  // access your pending object store
-  // get all records from store and set to a variable
-  const getAll = objectStore.getAll();
+  // Open a transaction on your BudgetStore db
+  let transaction = db.transaction(["BudgetStore"], "readwrite");
 
+  // access your BudgetStore object
+  const store = transaction.objectStore("BudgetStore");
+
+  // Get all records from store and set to a variable
+  const getAll = store.getAll();
+
+  // If the request was successful
   getAll.onsuccess = function () {
+    // If there are items in the store, we need to bulk add them when we are back online
     if (getAll.result.length > 0) {
       fetch("/api/transaction/bulk", {
         method: "POST",
@@ -51,20 +48,46 @@ function checkDatabase() {
         },
       })
         .then((response) => response.json())
-        .then(() => {
-          // if successful, open a transaction on your pending db
-          // access your pending object store
-          // clear all items in your store
-          const transaction = db.transaction(["pending"], "readwrite");
-          const objectStore = transaction.objectStore("pending");
+        .then((res) => {
+          // If our returned response is not empty
+          if (res.length !== 0) {
+            // Open another transaction to BudgetStore with the ability to read and write
+            transaction = db.transaction(["BudgetStore"], "readwrite");
 
-          objectStore.clear();
+            // Assign the current store to a variable
+            const currentStore = transaction.objectStore("BudgetStore");
+
+            // Clear existing entries because our bulk add was successful
+            currentStore.clear();
+            console.log("Clearing store 🧹");
+          }
         });
     }
   };
 }
 
-//And a delete?
+request.onsuccess = function (e) {
+  console.log("success");
+  db = e.target.result;
 
-// listen for app coming back online
+  // Check if app is online before reading from db
+  if (navigator.onLine) {
+    console.log("Backend online! 🗄️");
+    checkDatabase();
+  }
+};
+
+const saveRecord = (record) => {
+  console.log("Save record invoked");
+  // Create a transaction on the BudgetStore db with readwrite access
+  const transaction = db.transaction(["BudgetStore"], "readwrite");
+
+  // Access your BudgetStore object store
+  const store = transaction.objectStore("BudgetStore");
+
+  // Add record to your store with add method.
+  store.add(record);
+};
+
+// Listen for app coming back online--This starts the app
 window.addEventListener("online", checkDatabase);
