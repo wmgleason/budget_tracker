@@ -18,7 +18,7 @@ request.onupgradeneeded = (event) => {
 };
 
 request.onsuccess = (event) => {
-  console.log(`Success! ${event.type}`);
+  console.log(`Hooray - success! ${event.type}`);
   // check if app is online before reading from db
   if (navigator.onLine) {
     checkDatabase();
