@@ -20,4 +20,15 @@ router.get(`/api/transaction`, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+//delete
+router.delete("/api/transaction", (req, res) => {
+  Transaction.remove({})
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
+
 module.exports = router;
