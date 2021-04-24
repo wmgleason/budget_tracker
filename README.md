@@ -38,7 +38,7 @@ npm i mongoose
 ### Deploy
 
 - This app is deployed on Heroku here: 
-<a href="https://lloyd-budget-tracker-pwa.herokuapp.com/" target="_blank"> >>>> https://lloyd-budget-tracker-pwa.herokuapp.com/  <<<< </a>
+<a href="https://.herokuapp.com/" target="_blank"> >>>> https://.herokuapp.com/  <<<< </a>
 
 # Dependencies
 ``` 
