@@ -38,7 +38,7 @@ npm i mongoose
 ### Deploy
 
 - This app is deployed on Heroku here: 
-<a href="https://.herokuapp.com/" target="_blank"> >>>> https://.herokuapp.com/  <<<< </a>
+<a href="https://shrouded-inlet-63343.herokuapp.com/" target="_blank"> >>>> https://shrouded-inlet-63343.herokuapp.com/  <<<< </a>
 
 # Dependencies
 ``` 
