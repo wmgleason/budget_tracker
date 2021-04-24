@@ -16,11 +16,17 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:3000/budget";
-mongoose.connect(MONGODB_URI, {
+// const MONGODB_URI =
+//   process.env.MONGODB_URI || "mongodb://localhost:3000/budget";
+// mongoose.connect(MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useFindAndModify: false,
+// });
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:3000/budget", {
   useNewUrlParser: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 // routes
