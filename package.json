@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Budget tracking app using MongoDB and deployed at Heroku.",
   "main": "server.js",
+  "engines": {
+    "node": "14.x"
+  }
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -25,6 +28,7 @@
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "lite-server": "^2.5.3",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.5",
