@@ -1,6 +1,5 @@
 # Budget-Tracker
 - budget_tracker, a Progressive Web Application (PWA),  enables the user to add expenses and deposits to their budget with or without an online connection enabling a more app-like feel. When entering transactions offline, data should populate the total when connected back online.
-- Launch the application <a href="https://lloyd-budget-tracker-pwa.herokuapp.com/" target="_blank"> > https://lloyd-budget-tracker-pwa.herokuapp.com/  < </a>
 
 ## Table of contents
 
