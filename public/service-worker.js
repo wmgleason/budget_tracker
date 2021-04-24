@@ -4,7 +4,7 @@ const FILES_TO_CACHE = [
   `./public/db.js`,
   `./public/index.html`,
   `./public/index.js`,
-  `/./public/styles.css`,
+  `./public/styles.css`,
 ];
 
 const STATIC_CACHE = `static-cache-v1`;
