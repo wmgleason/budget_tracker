@@ -1,6 +1,11 @@
 console.log("This is your service-worker.js file!");
 
-const FILES_TO_CACHE = [`/db.js`, `/index.html`, `/index.js`, `/index.css`];
+const FILES_TO_CACHE = [
+  `./public/db.js`,
+  `./public/index.html`,
+  `./public/index.js`,
+  `/./public/styles.css`,
+];
 
 const STATIC_CACHE = `static-cache-v1`;
 const RUNTIME_CACHE = `runtime-cache`;
